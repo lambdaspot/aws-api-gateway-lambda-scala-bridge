@@ -3,3 +3,6 @@ jdk:
 
 install:
   - sbt pack
+
+after_install:
+  - cp target/pack/*/*.jar target/

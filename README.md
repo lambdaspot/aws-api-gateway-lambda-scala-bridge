@@ -23,7 +23,7 @@ your Scala projects.
 
 2. Add the dependency:
    ```scala
-     libraryDependencies += "dev.lambdaspot" %% "aws-api-gateway-lambda-scala-bridge" % "0.1.0"
+     libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.1"
    ```
 
 ### Example:
