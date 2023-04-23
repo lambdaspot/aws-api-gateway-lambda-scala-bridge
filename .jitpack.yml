@@ -1,0 +1,7 @@
+jdk:
+  - 11
+
+install:
+  - cd $HOME/.sbt/launchers/1.8.2/
+  - echo 'addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.17")' > plugins/plugins.sbt
+  - sbt pack
