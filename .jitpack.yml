@@ -5,5 +5,5 @@ install:
   - sbt pack makePom
 
 after_install:
-  - cp target/pack/lib/*.jar target/
-  - cp target/scala-3.2.2/aws-api-gateway-lambda-scala*pom target/
+  - cp target/pack/lib/* target/
+  - cp target/scala-*/aws-api-gateway-lambda-scala*pom target/
