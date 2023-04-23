@@ -5,4 +5,4 @@ install:
   - sbt pack
 
 after_install:
-  - cp target/pack/*/*.jar target/
+  - cp target/pack/lib/*.jar target/
