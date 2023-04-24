@@ -13,20 +13,26 @@ The micro-library delivers an improved alternative to the official handler, intr
 boilerplate code and constructor injection support, ultimately enhancing the efficiency and enjoyment of working with
 your Scala projects.
 
-### Adding dependency
+### Quickstart with [SBT](https://www.scala-sbt.org/):
 
-1.  Add the JitPack repository, for sbt:
+1.  Add the JitPack repository, and the following dependency::
 
     ```scala
-      resolvers += "jitpack" at "https://jitpack.io"
+      resolvers           += "jitpack" at "https://jitpack.io"
+      libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.1"
     ```
 
-2. Add the dependency:
-   ```scala
-     libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.1"
-   ```
+### Quickstart with [Scala-CLI](https://scala-cli.virtuslab.org/):
 
-### Example:
+1.  Add the following directives to your file:
+
+    ```scala
+      //> using repository "jitpack"
+      //> using dep "com.github.lambdaspot:aws-api-gateway-lambda-scala-bridge:0.1.1"
+    ```
+
+
+### Example usage:
 
 ```scala
 import dev.lambdaspot.aws.lambda.core._
@@ -39,8 +45,8 @@ object GreetingsResponseDto:
 
 // AWS Lambda handler implementation
 object HelloHandler extends AwsLambdaEntryPoint:
-  override def entryPoint: HelloHandler = new HelloHandler(greeter)
-  private lazy val greeter              = new GreetingsService
+  override lazy val entryPoint: HelloHandler = new HelloHandler(greeter)
+  private lazy val greeter                   = new GreetingsService
 
 class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsResponseDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsResponseDto] =

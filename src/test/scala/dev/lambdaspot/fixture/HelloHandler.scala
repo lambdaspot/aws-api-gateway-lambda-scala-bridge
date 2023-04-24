@@ -9,8 +9,8 @@ import dev.lambdaspot.aws.lambda.events.ApiGatewayProxiedRequest
 import scala.util.{Success, Try}
 
 object HelloHandler extends AwsLambdaEntryPoint:
-  override def entryPoint: HelloHandler = new HelloHandler(greeter)
-  private lazy val greeter              = new GreetingsService
+  override lazy val entryPoint: HelloHandler = new HelloHandler(greeter)
+  private lazy val greeter                   = new GreetingsService
 
 class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsResponseDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsResponseDto] =
