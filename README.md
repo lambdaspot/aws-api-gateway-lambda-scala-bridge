@@ -15,31 +15,33 @@ your Scala projects.
 
 ### Quickstart with [SBT](https://www.scala-sbt.org/):
 
-1.  Add the JitPack repository, and the following dependency::
+1.  Add the JitPack repository, and the following dependency:
 
-    ```scala
-      resolvers           += "jitpack" at "https://jitpack.io"
-      libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.1"
-    ```
+```scala
+resolvers           += "jitpack" at "https://jitpack.io"
+libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.1"
+```
 
 ### Quickstart with [Scala-CLI](https://scala-cli.virtuslab.org/):
 
 1.  Add the following directives to your file:
 
-    ```scala
-      //> using repository "jitpack"
-      //> using dep "com.github.lambdaspot:aws-api-gateway-lambda-scala-bridge:0.1.1"
-    ```
+```scala
+//> using repository "jitpack"
+//> using dep "com.github.lambdaspot:aws-api-gateway-lambda-scala-bridge:0.1.1"
+```
 
 
 ### Example usage:
 
 ```scala
+package com.example
+
 import dev.lambdaspot.aws.lambda.core._
 import dev.lambdaspot.aws.lambda.events._
 
 // Given a response object with ser/deserialization codec
-final case class GreetingsResponseDto(pleasureLeve: Int, message: String)
+final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
 object GreetingsResponseDto:
   given codec: JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
 
@@ -53,11 +55,11 @@ class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[Greetings
     greeter.process(input.pathParameters)
 ```
 
-In CloudFormation, define the handler using the `apply` method as shown below:
+In CloudFormation, define the handler with the `apply` as shown below:
 
 ```yaml
   MyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: HelloHandler::apply
+      Handler: com.example.HelloHandler::apply
 ```
