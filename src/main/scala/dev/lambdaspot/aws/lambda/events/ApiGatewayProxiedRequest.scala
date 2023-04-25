@@ -42,4 +42,4 @@ final case class ApiGatewayProxiedRequest(
 )
 
 object ApiGatewayProxiedRequest:
-  given codec: JsonValueCodec[ApiGatewayProxiedRequest] = JsonCodecMaker.make
+  given JsonValueCodec[ApiGatewayProxiedRequest] = JsonCodecMaker.make

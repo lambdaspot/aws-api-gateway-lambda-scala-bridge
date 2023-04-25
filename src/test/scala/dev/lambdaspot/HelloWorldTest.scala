@@ -1,15 +1,14 @@
 package dev.lambdaspot
 
 import dev.lambdaspot.aws.lambda.core.data.Fixtures
+import dev.lambdaspot.fixture.{GreetingsResponseDto, HelloHandler}
 import org.scalatest.*
-import dev.lambdaspot.fixture.HelloHandler
-import dev.lambdaspot.fixture.GreetingsResponseDto
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 import scala.util.Try
 
-class HelloWorldTest extends AnyFlatSpec with Matchers with TryValues {
+class HelloWorldTest extends BaseTest:
 
   private val testSubject = HelloHandler
 
@@ -34,5 +33,3 @@ class HelloWorldTest extends AnyFlatSpec with Matchers with TryValues {
 
     result.success.value shouldBe GreetingsResponseDto(3, "Hello World!")
   }
-  
-}

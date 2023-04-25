@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Hello World with a Serverless AWS Lambda Application in Scala
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloHandler.jar
+      Handler: HelloHandler::apply
+      Runtime: java11
+      Description: Scala function
+      MemorySize: 1769
+      Timeout: 10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambda_ReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+      Tracing: Active
+      Events:
+        Hello:
+          Type: Api
+          Properties:
+            Path: /hello/{name}
+            Method: GET

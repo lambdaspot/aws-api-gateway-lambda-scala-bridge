@@ -34,6 +34,42 @@ libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-b
 
 ### Example usage:
 
+#### Using shorthand syntax
+
+This example illustrates developing a simplified AWS Lambda function, utilizing the more concise implementation approach
+made possible by the Single Abstract Method (SAM) syntax.
+
+```scala
+package com.example
+  
+import com.amazonaws.services.lambda.runtime.Context
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.JsonCodecMaker
+import dev.lambdaspot.aws.lambda.events.*
+import dev.lambdaspot.aws.lambda.core.*
+import dev.lambdaspot.aws.lambda.core.AwsLambdaEntryPoint.SyntacticSugar
+import scala.language.implicitConversions
+import scala.util.{Success, Try}
+  
+// AWS Lambda handler implementation
+object HelloHandler extends AwsLambdaEntryPoint:
+  override lazy val entryPoint: ApiGatewayLambda[GreetingsResponseDto] =
+    (request: ApiGatewayProxiedRequest, context: Context) =>
+      Success(GreetingsResponseDto("Mr.", "John Doe"))
+
+// Given a response object with ser/deserialization codec
+final case class GreetingsResponseDto(title: String, name: String)
+object GreetingsResponseDto:
+  given JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
+```
+
+#### Using class-based syntax with constructor injection support
+
+This example illustrates creating a simple AWS Lambda function using a detailed implementation method. It is beneficial
+for larger projects that involve multiple services. By designing the Lambda controller as a class with
+constructor-injected dependencies, the application becomes more maintainable and extensible, making it easier to meet
+complex project demands.
+
 ```scala
 package com.example
 
@@ -42,12 +78,8 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.JsonCodecMaker
 import dev.lambdaspot.aws.lambda.core.*
 import dev.lambdaspot.aws.lambda.events.*
-
-// Given a response object with ser/deserialization codec
-final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
-object GreetingsResponseDto:
-  given codec: JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
-
+import scala.util.{Success, Try}
+  
 // AWS Lambda handler implementation
 object HelloHandler extends AwsLambdaEntryPoint:
   override lazy val entryPoint: HelloHandler = new HelloHandler(greeter)
@@ -56,7 +88,15 @@ object HelloHandler extends AwsLambdaEntryPoint:
 class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsResponseDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsResponseDto] =
     greeter.process(input.pathParameters)
+
+// Given a response object with ser/deserialization codec
+final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
+object GreetingsResponseDto:
+  given JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
+
 ```
+
+#### Deploying to AWS
 
 In CloudFormation, define the handler with the `apply` as shown below:
 

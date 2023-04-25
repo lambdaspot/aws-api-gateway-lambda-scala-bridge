@@ -20,7 +20,7 @@ import scala.util.Try
   * // Give the response object
   * final case class ResponseDto(level: Int, message: String)
   * object ResponseDto:
-  *   given codec: JsonValueCodec[ResponseDto] = JsonCodecMaker.make
+  *   given JsonValueCodec[ResponseDto] = JsonCodecMaker.make
   *
   * // Implementation of the lambda request handler supporting construction injection
   * object HelloHandler extends AwsLambdaEntryPoint:

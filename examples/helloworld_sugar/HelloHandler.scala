@@ -9,18 +9,18 @@
 import com.amazonaws.services.lambda.runtime.Context
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.JsonCodecMaker
-import dev.lambdaspot.aws.lambda.core.*
 import dev.lambdaspot.aws.lambda.events.*
+import dev.lambdaspot.aws.lambda.core.*
+import dev.lambdaspot.aws.lambda.core.AwsLambdaEntryPoint.SyntacticSugar
+import scala.language.implicitConversions
 
 import scala.util.{Success, Try}
 
 // AWS Lambda handler
 object HelloHandler extends AwsLambdaEntryPoint:
-  override lazy val entryPoint: HelloHandler = new HelloHandler
-
-class HelloHandler extends ApiGatewayLambda[GreetingsResponseDto]:
-  override def run(request: ApiGatewayProxiedRequest, context: Context): Try[GreetingsResponseDto] =
-    Success(GreetingsResponseDto(100, request.pathParameters.getOrElse("name", "Stranger")))
+  override lazy val entryPoint: ApiGatewayLambda[GreetingsResponseDto] =
+    (request: ApiGatewayProxiedRequest, context: Context) =>
+      Success(GreetingsResponseDto(100, request.pathParameters.getOrElse("name", "Stranger")))
 
 // Response object
 final case class GreetingsResponseDto(pleasureLevel: Int, name: String)

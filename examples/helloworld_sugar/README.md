@@ -1,9 +1,7 @@
 ## Example AWS Lambda Application
 
-This example illustrates creating a simple AWS Lambda function using a detailed implementation method. It is beneficial
-for larger projects that involve multiple services. By designing the Lambda controller as a class with
-constructor-injected dependencies, the application becomes more maintainable and extensible, making it easier to meet
-complex project demands.
+This example illustrates developing a simplified AWS Lambda function, utilizing the more concise implementation approach
+made possible by the Single Abstract Method (SAM) syntax.
 
 ## Building deployable artifact
 
