@@ -20,9 +20,11 @@ object HelloHandler extends AwsLambdaEntryPoint:
 
 class HelloHandler extends ApiGatewayLambda[GreetingsResponseDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsResponseDto] =
-    Success(GreetingsResponseDto(100, "Hello World!"))
+    Success {
+      GreetingsResponseDto(100, input.pathParameters.getOrElse("name", "Stranger"))
+    }
 
 // Response object
-final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
+final case class GreetingsResponseDto(pleasureLevel: Int, name: String)
 object GreetingsResponseDto:
   given codec: JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
