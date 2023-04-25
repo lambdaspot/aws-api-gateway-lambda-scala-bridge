@@ -37,8 +37,11 @@ libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-b
 ```scala
 package com.example
 
-import dev.lambdaspot.aws.lambda.core._
-import dev.lambdaspot.aws.lambda.events._
+import com.amazonaws.services.lambda.runtime.Context
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.JsonCodecMaker
+import dev.lambdaspot.aws.lambda.core.*
+import dev.lambdaspot.aws.lambda.events.*
 
 // Given a response object with ser/deserialization codec
 final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
