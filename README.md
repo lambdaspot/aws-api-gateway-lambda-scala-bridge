@@ -33,7 +33,6 @@ libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-b
 //> using dep "com.github.lambdaspot:aws-api-gateway-lambda-scala-bridge:0.1.3"
 ```
 
-
 ### Example usage:
 
 #### Using shorthand syntax
@@ -63,6 +62,11 @@ object HelloHandler extends AwsLambdaEntryPoint:
 final case class GreetingsResponseDto(title: String, name: String)
 object GreetingsResponseDto:
   given JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
+```
+
+The handler processes the event, serializing a response to JSON. In the given example, it is:
+```json
+{ "title": "Mr.", "name": "John Doe" }
 ```
 
 #### Using class-based syntax with constructor injection support
@@ -95,7 +99,11 @@ class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[Greetings
 final case class GreetingsResponseDto(pleasureLevel: Int, message: String)
 object GreetingsResponseDto:
   given JsonValueCodec[GreetingsResponseDto] = JsonCodecMaker.make
+```
 
+The handler processes the event, serializing a response to JSON. In the given example, it would be, e.g.:
+```json
+{ "pleasureLevel": 10, "message": "Hello World!" }
 ```
 
 #### Deploying to AWS
