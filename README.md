@@ -1,5 +1,7 @@
 # aws-api-gateway-lambda-scala-bridge
 
+[![Release](https://jitpack.io/v/lambdaspot/aws-api-gateway-lambda-scala-bridge.svg)](https://jitpack.io/#lambdaspot/aws-api-gateway-lambda-scala-bridge)
+
 A Scala 3 bridge
 for [`aws-lambda-java-core`](https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-core) designed to
 work with API Gateway Lambda proxy integration, using
