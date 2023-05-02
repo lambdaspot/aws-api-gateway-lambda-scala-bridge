@@ -1,6 +1,6 @@
 # aws-lambda-scala-bridge
 
-[![Release](https://jitpack.io/v/lambdaspot/aws-api-gateway-lambda-scala-bridge.svg)](https://jitpack.io/#lambdaspot/aws-api-gateway-lambda-scala-bridge)
+[![Release](https://jitpack.io/v/lambdaspot/aws-lambda-scala-bridge.svg)](https://jitpack.io/#lambdaspot/aws-lambda-scala-bridge)
 
 A strawman implementation of a Scala 3 bridge
 for [`aws-lambda-java-core`](https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-core),
@@ -22,7 +22,7 @@ your Scala projects.
 
 ```scala
 resolvers += "jitpack" at "https://jitpack.io"
-libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-bridge" % "0.1.4"
+libraryDependencies += "com.github.lambdaspot" % "aws-lambda-scala-bridge" % "0.1.4"
 ```
 
 ### Quickstart with [Scala-CLI](https://scala-cli.virtuslab.org/):
@@ -31,7 +31,7 @@ libraryDependencies += "com.github.lambdaspot" % "aws-api-gateway-lambda-scala-b
 
 ```scala
 //> using repository "jitpack"
-//> using dep "com.github.lambdaspot:aws-api-gateway-lambda-scala-bridge:0.1.4"
+//> using dep "com.github.lambdaspot:aws-lambda-scala-bridge:0.1.4"
 ```
 
 ### Example usage:

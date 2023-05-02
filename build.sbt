@@ -1,6 +1,6 @@
 enablePlugins(PackPlugin)
 
-name         := "aws-api-gateway-lambda-scala-bridge"
+name         := "aws-lambda-scala-bridge"
 version      := "0.1.4"
 scalaVersion := "3.2.2"
 organization := "dev.lambdaspot"
