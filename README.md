@@ -98,7 +98,7 @@ import scala.util.{Success, Try}
 // AWS Lambda handler implementation
 object HelloHandler extends AwsLambdaEntryPoint:
   override lazy val entryPoint: HelloHandler = new HelloHandler(greeter)
-  private lazy val greeter = new GreetingsService
+  private lazy val greeter                   = new GreetingsService
 
 class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsDto] =
