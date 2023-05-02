@@ -4,7 +4,7 @@ jdk:
 install:
   - sbt pack makePom
   - cp target/pack/lib/*.jar target/
-  - cp target/scala-*/aws-api-gateway-lambda-scala*.pom target/
+  - cp target/scala-*/aws-lambda-scala*.pom target/
   - mkdir -p $HOME/.m2/repository/dev/lambdaspot/aws-lambda-scala-bridge_3/0.1.5
   - cp target/*.jar $HOME/.m2/repository/dev/lambdaspot/aws-lambda-scala-bridge_3/0.1.5/
   - cp target/*.pom $HOME/.m2/repository/dev/lambdaspot/aws-lambda-scala-bridge_3/0.1.5/
