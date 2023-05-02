@@ -54,22 +54,16 @@ import scala.language.implicitConversions
 import scala.util.{Success, Try}
 
 // AWS Lambda handler implementation
-object HelloHandler extends AwsLambdaEntryPoint
-
-:
+object HelloHandler extends AwsLambdaEntryPoint:
   override lazy val entryPoint: ApiGatewayLambda[GreetingsDto] =
     (request: ApiGatewayProxiedRequest, context: Context) =>
       Success(GreetingsDto("Mr.", "John Doe"))
 
-  // Given a response object with serialization codec
-  final case class GreetingsDto(title: String, name: String)
+// Given a response object with serialization codec
+final case class GreetingsDto(title: String, name: String)
 
-  object GreetingsDto
-
-:
-  given JsonValueCodec
-  [GreetingsDto
-  ] = JsonCodecMaker.make
+object GreetingsDto:
+  given JsonValueCodec[GreetingsDto] = JsonCodecMaker.make
 ```
 
 The handler processes the event, serializing a response to JSON. In the given example, it is:
@@ -102,27 +96,19 @@ import dev.lambdaspot.aws.lambda.events.*
 import scala.util.{Success, Try}
 
 // AWS Lambda handler implementation
-object HelloHandler extends AwsLambdaEntryPoint
-
-:
+object HelloHandler extends AwsLambdaEntryPoint:
   override lazy val entryPoint: HelloHandler = new HelloHandler(greeter)
   private lazy val greeter = new GreetingsService
 
-  class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsDto]
-
-:
+class HelloHandler(greeter: GreetingsService) extends ApiGatewayLambda[GreetingsDto]:
   override def run(input: ApiGatewayProxiedRequest, context: Context): Try[GreetingsDto] =
     greeter.process(input.pathParameters)
 
-  // Given a response object with serialization codec
-  final case class GreetingsDto(pleasureLevel: Int, message: String)
+// Given a response object with serialization codec
+final case class GreetingsDto(pleasureLevel: Int, message: String)
 
-  object GreetingsDto
-
-:
-  given JsonValueCodec
-  [GreetingsDto
-  ] = JsonCodecMaker.make
+object GreetingsDto:
+  given JsonValueCodec[GreetingsDto] = JsonCodecMaker.make
 ```
 
 The handler processes the event, serializing a response to JSON. In the given example, it would be, e.g.:
@@ -150,42 +136,30 @@ import dev.lambdaspot.aws.lambda.core.{AwsLambda, AwsLambdaEntryPoint}
 import scala.util.{Success, Try}
 
 // AWS Lambda request handler
-object SimpleHandler extends AwsLambdaEntryPoint
+object SimpleHandler extends AwsLambdaEntryPoint:
+  override lazy val entryPoint: SimpleHandler = new SimpleHandler
 
-:
-override lazy val entryPoint: SimpleHandler = new SimpleHandler
-
-class SimpleHandler extends AwsLambda[PersonDto, ApiGatewayProxiedResponse]
-
-:
-override def run(event: PersonDto, context: Context): Try[ApiGatewayProxiedResponse] =
-  Success(
-    ApiGatewayProxiedResponse(
-      statusCode = 200,
-      headers = Map("Content-Type" -> "application/json"),
-      body = Some(s"Hello ${event.name}!")
+class SimpleHandler extends AwsLambda[PersonDto, ApiGatewayProxiedResponse]:
+  override def run(event: PersonDto, context: Context): Try[ApiGatewayProxiedResponse] =
+    Success(
+      ApiGatewayProxiedResponse(
+        statusCode = 200,
+        headers = Map("Content-Type" -> "application/json"),
+        body = Some(s"Hello ${event.name}!")
+      )
     )
-  )
 
 // Given request event with deserialization codec
 final case class PersonDto(name: String, age: Int)
 
-object PersonDto
-
-:
-given JsonValueCodec
-[PersonDto
-] = JsonCodecMaker.make
+object PersonDto:
+  given JsonValueCodec[PersonDto] = JsonCodecMaker.make
 
 // Given a response object with serialization codec
 final case class GreetingsDto(pleasureLevel: Int, message: String)
 
-object GreetingsDto
-
-:
-given JsonValueCodec
-[GreetingsDto
-] = JsonCodecMaker.make
+object GreetingsDto:
+  given JsonValueCodec[GreetingsDto] = JsonCodecMaker.make
 ```
 
 Handles JSON event:
