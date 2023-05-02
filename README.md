@@ -22,7 +22,7 @@ your Scala projects.
 
 ```scala
 resolvers += "jitpack" at "https://jitpack.io"
-libraryDependencies += "com.github.lambdaspot" % "aws-lambda-scala-bridge" % "0.1.4"
+libraryDependencies += "com.github.lambdaspot" % "aws-lambda-scala-bridge" % "0.1.5"
 ```
 
 ### Quickstart with [Scala-CLI](https://scala-cli.virtuslab.org/):
@@ -31,7 +31,7 @@ libraryDependencies += "com.github.lambdaspot" % "aws-lambda-scala-bridge" % "0.
 
 ```scala
 //> using repository "jitpack"
-//> using dep "com.github.lambdaspot:aws-lambda-scala-bridge:0.1.4"
+//> using dep "com.github.lambdaspot:aws-lambda-scala-bridge:0.1.5"
 ```
 
 ### Example usage:

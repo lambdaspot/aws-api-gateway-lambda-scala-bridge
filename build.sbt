@@ -1,7 +1,7 @@
 enablePlugins(PackPlugin)
 
 name         := "aws-lambda-scala-bridge"
-version      := "0.1.4"
+version      := "0.1.5"
 scalaVersion := "3.2.2"
 organization := "dev.lambdaspot"
 javacOptions ++= Seq("-source", "11", "-target", "11")
