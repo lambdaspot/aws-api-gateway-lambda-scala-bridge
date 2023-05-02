@@ -10,5 +10,5 @@ import dev.lambdaspot.aws.lambda.events.*
 import scala.util.{Success, Try}
 
 object SyntacticSugarHandler extends AwsLambdaEntryPoint:
-  override lazy val entryPoint: ApiGatewayLambda[GreetingsResponseDto] =
-    (input: ApiGatewayProxiedRequest, context: Context) => GreetingsResponseDto.of(input.pathParameters)
+  override lazy val entryPoint: ApiGatewayLambda[GreetingsDto] =
+    (input: ApiGatewayProxiedRequest, context: Context) => GreetingsDto.of(input.pathParameters)

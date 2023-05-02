@@ -1,7 +1,7 @@
 package dev.lambdaspot
 
 import dev.lambdaspot.aws.lambda.core.data.Fixtures
-import dev.lambdaspot.fixture.{GreetingsResponseDto, HelloHandler, SyntacticSugarHandler}
+import dev.lambdaspot.fixture.{GreetingsDto, HelloHandler, SyntacticSugarHandler}
 import org.scalatest.*
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -18,7 +18,7 @@ class SyntacticSugarTest extends BaseTest:
         .DummyApiGatewayRequest("GET")
         .copy(pathParameters = Map("name" -> "Hilary"))
 
-    val result: Try[GreetingsResponseDto] = testSubject.entryPoint.run(request, null)
+    val result: Try[GreetingsDto] = testSubject.entryPoint.run(request, null)
 
-    result.success.value shouldBe GreetingsResponseDto(100, "Hilary")
+    result.success.value shouldBe GreetingsDto(100, "Hilary")
   }

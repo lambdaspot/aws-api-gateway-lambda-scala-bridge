@@ -5,8 +5,8 @@ Resources:
   function:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: HelloHandler.jar
-      Handler: HelloHandler::apply
+      CodeUri: MyApp.jar
+      Handler: MyApp::apply
       Runtime: java17
       Description: Scala function
       MemorySize: 1769

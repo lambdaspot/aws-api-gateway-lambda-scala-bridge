@@ -38,17 +38,14 @@ import scala.util.Try
 abstract class ApiGatewayLambda[Out](using JsonValueCodec[Out]) extends AwsLambda[ApiGatewayProxiedRequest, Out]:
 
   override def handleRequest(input: InputStream, output: OutputStream, context: Context): Unit =
-    val requestStart = System.currentTimeMillis()
-
-    processLambda(input, output, context).recover { error =>
-      Console.err.println(s"Request failed with error: ${error.getMessage}")
-      writeResponse(output, 500, error.getMessage)
+    Meter.measure(context.getLogger) {
+      processLambda(input, output, context).recover { error =>
+        context.getLogger.log(s"Request failed with error: ${error.getMessage}")
+        writeResponse(output, 500, error.getMessage)
+      }
     }
 
-    val requestDuration = System.currentTimeMillis() - requestStart
-    Console.out.println(s"Request took $requestDuration ms")
-
-  private def processLambda(input: InputStream, output: OutputStream, context: Context) =
+  private def processLambda(input: InputStream, output: OutputStream, context: Context): Try[Unit] =
     for
       request      <- Try(readFromStream[ApiGatewayProxiedRequest](input))
       result       <- run(request, context)

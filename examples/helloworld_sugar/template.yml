@@ -7,7 +7,7 @@ Resources:
     Properties:
       CodeUri: HelloHandler.jar
       Handler: HelloHandler::apply
-      Runtime: java11
+      Runtime: java17
       Description: Scala function
       MemorySize: 1769
       Timeout: 10
